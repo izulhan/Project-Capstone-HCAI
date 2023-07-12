@@ -1,0 +1,55 @@
+{
+  "doc_type": "pipeline",
+  "pipelines": [{
+    "id": "c5bead1c-4da5-4efe-bc99-e0a25648ec74",
+    "nodes": [{
+      "id": "autoai-tsad",
+      "op": "wml-http-score",
+      "outputs": [{
+        "id": "autoai-tsad"
+      }],
+      "parameters": {
+        "output_logs": true,
+        "del_on_close": true,
+        "optimization": {
+          "learning_type": "timeseries-anomaly-prediction",
+          "pipelines": [],
+          "feature_columns": ["Q2#3.Social_media"],
+          "max_num_pipelines": 3,
+          "holdout_param": 0.2
+        },
+        "storage": {
+          "exchange": "training-prod",
+          "url": "amqps://ibm_cloud_69df1fe1_059c_465e_a900_b433f0ce93bc:2a85d67d3552ca0612d32b9a3f23080dcb91efa1f1e9df4bd95f1021d7fa59a8@e332d2f8-977e-4c96-9c93-6f7f6bd67b63.c9v3nfod0e3fgcbd1oug.private.databases.appdomain.cloud:32193"
+        },
+        "n_parallel_data_connections": 4,
+        "one_vs_all_file": true,
+        "compute_pipeline_notebooks_flag": true,
+        "wml_status": {
+          "url": "https://us-south.ml.cloud.ibm.com/v4_private/trainings"
+        }
+      },
+      "runtime_ref": "autoai",
+      "type": "execution_node"
+    }],
+    "runtime_ref": "hybrid"
+  }],
+  "primary_pipeline": "c5bead1c-4da5-4efe-bc99-e0a25648ec74",
+  "runtimes": [{
+    "app_data": {
+      "wml_data": {
+        "hardware_spec": {
+          "id": "a6c4923b-b8e4-444c-9f43-8a7ec3020110",
+          "name": "L"
+        },
+        "software_spec": {
+          "name": "autoai-tsad_rt22.2-py3.10"
+        }
+      }
+    },
+    "id": "autoai",
+    "name": "auto_ai.tsad",
+    "version": "1.0.46"
+  }],
+  "version": "2.0"
+}
